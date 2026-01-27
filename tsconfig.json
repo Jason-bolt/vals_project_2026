@@ -16,7 +16,8 @@
     "plugins": [
       {
         "name": "next"
-      }
+      },
+      ["prettier-plugin-tailwindcss"]
     ],
     "paths": {
       "@/*": ["./*"]
