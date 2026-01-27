@@ -105,7 +105,7 @@ export default function Home() {
     canvas.classList.remove("w-full");
     canvas.classList.remove("max-w-2xl");
     canvas.classList.add("w-[600px]");
-    canvas.classList.add("scale-50");
+    canvas.classList.add("scale-90");
 
     htmlToImage.toPng(canvas).then((dataUrl) => {
       const link = document.createElement("a");
@@ -113,7 +113,7 @@ export default function Home() {
       link.href = dataUrl;
       link.click();
       canvas.classList.remove("w-[600px]");
-      canvas.classList.remove("scale-50");
+      canvas.classList.remove("scale-90");
       canvas.classList.add("w-full");
       canvas.classList.add("max-w-2xl");
       if (closeButton) {
@@ -123,7 +123,7 @@ export default function Home() {
       console.error("Error generating image:", error);
       // Restore classes on error
       canvas.classList.remove("w-[600px]");
-      canvas.classList.remove("scale-50");
+      canvas.classList.remove("scale-90");
       canvas.classList.add("w-full");
       canvas.classList.add("max-w-2xl");
       if (closeButton) {
