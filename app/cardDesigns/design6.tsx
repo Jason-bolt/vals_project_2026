@@ -1,6 +1,6 @@
 "use client";
 
-import { BiSave, BiCopy } from "react-icons/bi";
+import { BiSave } from "react-icons/bi";
 
 const Design6 = ({
   message,
@@ -84,7 +84,7 @@ const Design6 = ({
 
       <div className="flex items-center justify-center gap-4 w-full mt-2">
         <div
-          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg"
+          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 hover:cursor-pointer"
           onClick={() => downloadCard("vals_card6")}
         >
           <BiSave /> Download

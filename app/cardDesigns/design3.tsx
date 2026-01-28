@@ -1,13 +1,16 @@
 "use client";
 
-import { BiSave, BiCopy } from "react-icons/bi";
+import { BiSave } from "react-icons/bi";
+import { GiSelfLove } from "react-icons/gi";
 
 const Design3 = ({
   message,
+  sender,
   downloadCard,
   setMessage,
 }: {
   message: string;
+  sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (s: string) => void;
 }) => {
@@ -19,6 +22,17 @@ const Design3 = ({
         id="vals_card3"
         className="relative w-full max-w-2xl mx-4 h-[80vh] max-h-[600px] bg-gradient-to-br from-amber-50 via-yellow-50 to-rose-50 rounded-2xl shadow-2xl overflow-hidden border-4 border-amber-300"
       >
+        {/* Sender */}
+        {sender && (
+          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md">
+            <p className="w-full flex items-center justify-center gap-1">
+              With love from{" "}
+              <span className="text-red-400 font-bold">{sender}</span>
+              <GiSelfLove className="text-red-500" />
+            </p>
+          </div>
+        )}
+
         {/* Gold shimmer effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent animate-pulse"></div>
 
@@ -75,7 +89,7 @@ const Design3 = ({
       </div>
       <div className="flex items-center justify-center gap-4 w-full mt-2">
         <div
-          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg"
+          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 hover:cursor-pointer"
           onClick={() => downloadCard("vals_card3")}
         >
           <BiSave /> Download

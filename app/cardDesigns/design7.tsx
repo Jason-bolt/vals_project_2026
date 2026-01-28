@@ -1,13 +1,16 @@
 "use client";
 
-import { BiSave, BiCopy } from "react-icons/bi";
+import { BiSave } from "react-icons/bi";
+import { GiSelfLove } from "react-icons/gi";
 
 const Design7 = ({
   message,
+  sender,
   downloadCard,
   setMessage,
 }: {
   message: string;
+  sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (s: string) => void;
 }) => {
@@ -19,6 +22,17 @@ const Design7 = ({
         id="vals_card7"
         className="relative w-full max-w-2xl mx-4 h-[80vh] max-h-[600px] bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-gray-200"
       >
+        {/* Sender */}
+        {sender && (
+          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md">
+            <p className="w-full flex items-center justify-center gap-1">
+              With love from{" "}
+              <span className="text-red-400 font-bold">{sender}</span>
+              <GiSelfLove className="text-red-500" />
+            </p>
+          </div>
+        )}
+
         {/* Minimalist geometric shapes */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-bl-full opacity-30"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-100 rounded-tr-full opacity-30"></div>
@@ -57,7 +71,7 @@ const Design7 = ({
 
       <div className="flex items-center justify-center gap-4 w-full mt-2">
         <div
-          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg"
+          className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 hover:cursor-pointer"
           onClick={() => downloadCard("vals_card7")}
         >
           <BiSave /> Download
