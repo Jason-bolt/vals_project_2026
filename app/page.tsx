@@ -4,6 +4,7 @@
 import { GiSelfLove } from "react-icons/gi";
 import { processForm } from "./actions/processForm";
 import { FormEvent, useState } from "react";
+
 import * as htmlToImage from "html-to-image";
 import Design1 from "./cardDesigns/design1";
 import Design2 from "./cardDesigns/design2";
@@ -62,11 +63,13 @@ const designs = [
 const GetDesignComponent = ({
   message,
   randomIndex,
+  sender,
   downloadCard,
   setMessage,
 }: {
   message: string;
   randomIndex: number;
+  sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (message: string) => void;
 }): React.JSX.Element => {
@@ -74,6 +77,7 @@ const GetDesignComponent = ({
   return (
     <DesignComponent
       message={message}
+      sender={sender}
       downloadCard={downloadCard}
       setMessage={setMessage}
     />
@@ -83,59 +87,67 @@ const GetDesignComponent = ({
 export default function Home() {
   const [message, setMessage] = useState<string>("");
   const [randomIndex, setRandomIndex] = useState<number>(0);
+  const [sender, setSender] = useState<string | undefined>("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const message = await processForm(formData);
+    const { message, sender } = await processForm(formData);
     setMessage(message as string);
+    setSender(sender);
     setRandomIndex(Math.floor(Math.random() * designs.length));
   };
 
   const downloadCard = (id: string) => {
     const canvas = document.getElementById(id) as HTMLElement;
     if (!canvas) return;
-    
+
     // Find the close button within the same card container
     const closeButton = canvas.querySelector("#closeButton") as HTMLElement;
     if (closeButton) {
       closeButton.classList.add("hidden");
     }
-    
+
     canvas.classList.remove("w-full");
     canvas.classList.remove("max-w-2xl");
-    canvas.classList.add("w-[600px]");
+    canvas.classList.add("w-[700px]");
     canvas.classList.add("scale-90");
+    canvas.classList.add("-left-4");
 
-    htmlToImage.toPng(canvas).then((dataUrl) => {
-      const link = document.createElement("a");
-      link.download = "valsDayImage";
-      link.href = dataUrl;
-      link.click();
-      canvas.classList.remove("w-[600px]");
-      canvas.classList.remove("scale-90");
-      canvas.classList.add("w-full");
-      canvas.classList.add("max-w-2xl");
-      if (closeButton) {
-        closeButton.classList.remove("hidden");
-      }
-    }).catch((error) => {
-      console.error("Error generating image:", error);
-      // Restore classes on error
-      canvas.classList.remove("w-[600px]");
-      canvas.classList.remove("scale-90");
-      canvas.classList.add("w-full");
-      canvas.classList.add("max-w-2xl");
-      if (closeButton) {
-        closeButton.classList.remove("hidden");
-      }
-    });
+    htmlToImage
+      .toPng(canvas)
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "valsDayImage";
+        link.href = dataUrl;
+        link.click();
+        canvas.classList.remove("w-[700px]");
+        canvas.classList.remove("scale-90");
+        canvas.classList.remove("-left-4");
+        canvas.classList.add("w-full");
+        canvas.classList.add("max-w-2xl");
+        if (closeButton) {
+          closeButton.classList.remove("hidden");
+        }
+      })
+      .catch((error) => {
+        console.error("Error generating image:", error);
+        // Restore classes on error
+        canvas.classList.remove("w-[700px]");
+        canvas.classList.remove("scale-90");
+        canvas.classList.remove("-left-4");
+        canvas.classList.add("w-full");
+        canvas.classList.add("max-w-2xl");
+        if (closeButton) {
+          closeButton.classList.remove("hidden");
+        }
+      });
   };
 
   return (
     <section>
       <div className="w-full h-44 xs:h-40 sm:h-36 md:h-32 lg:h-28 bg-red-500 flex justify-center items-center">
-        <h1 className="text-2xl font-bold font-send-flowers px-24 text-center">
+        <h1 className="text-2xl font-bold font-tangerine px-24 text-center">
           Write a Valentine Message, Get a Beautiful Share Card
         </h1>
       </div>
@@ -146,6 +158,7 @@ export default function Home() {
             <div className="w-full h-screen bg-red-500 z-50 absolute -top-[100vh] translate-1"></div>
             <GetDesignComponent
               message={message}
+              sender={sender}
               randomIndex={randomIndex}
               downloadCard={downloadCard}
               setMessage={setMessage}
@@ -154,7 +167,7 @@ export default function Home() {
         )}
         <form
           onSubmit={handleSubmit}
-          className="w-xl flex flex-col bg-white/30 rounded-lg shadow-md justify-center gap-10 p-10 items-center"
+          className="w-xl flex flex-col bg-white/30 rounded-lg shadow-md justify-center gap-8 p-10 items-center"
         >
           <div className="flex flex-col w-full justify-center items-center">
             <label htmlFor="name" className="text-xl font-bold pb-2">
@@ -163,8 +176,21 @@ export default function Home() {
             <input
               type="text"
               name="recipient"
+              maxLength={25}
               className="w-full p-2 border ring-1 focus:outline-red-900 focus:ring-red-900 bg-red-50 border-gray-300 rounded-md"
               placeholder="Enter recipient's name...(optional)"
+            />
+          </div>
+          <div className="flex flex-col w-full justify-center items-center">
+            <label htmlFor="name" className="text-xl font-bold pb-2">
+              Sender name:
+            </label>
+            <input
+              type="text"
+              name="sender"
+              maxLength={25}
+              className="w-full p-2 border ring-1 focus:outline-red-900 focus:ring-red-900 bg-red-50 border-gray-300 rounded-md"
+              placeholder="Your first or nickname...(optional)"
             />
           </div>
           <div className="flex flex-col w-full justify-center items-center">

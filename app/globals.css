@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Send+Flowers&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Send+Flowers&family=Tangerine:wght@400;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -11,7 +11,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-delius-swash-caps: "Delius swash caps", cursive;
+  --font-tangerine: "Tangerine", cursive;
   --font-send-flowers: "send flowers", cursive;
 }
 

@@ -54,8 +54,9 @@ export async function selectMessage(
 
 export async function generateCard(
   recipient: string | undefined,
+  sender: string | undefined,
   style: Style,
 ) {
   const message = await selectMessage(recipient, style);
-  return message;
+  return { message, sender };
 }
