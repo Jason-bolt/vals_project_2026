@@ -24,7 +24,7 @@ const Design4 = ({
       >
         {/* Sender */}
         {sender && (
-          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md">
+          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md text-nowrap whitespace-nowrap">
             <p className="w-full flex items-center justify-center gap-1">
               With love from{" "}
               <span className="text-red-400 font-bold">{sender}</span>

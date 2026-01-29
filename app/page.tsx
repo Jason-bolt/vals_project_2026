@@ -156,10 +156,10 @@ export default function Home() {
         {message && (
           <div className="inset-0 z-10 absolute flex justify-center items-center w-full h-full">
             <div className="w-full h-screen bg-red-500 z-50 absolute -top-[100vh] translate-1"></div>
-            <Design1
+            <GetDesignComponent
               message={message}
               sender={sender}
-              // randomIndex={randomIndex}
+              randomIndex={randomIndex}
               downloadCard={downloadCard}
               setMessage={setMessage}
             />

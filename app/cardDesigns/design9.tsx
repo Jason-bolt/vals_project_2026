@@ -23,7 +23,7 @@ const Design9 = ({
         className="relative w-full max-w-2xl mx-4 h-[80vh] max-h-[600px] bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 rounded-2xl shadow-2xl overflow-hidden border-4 border-purple-500"
       >
         {sender && (
-          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md">
+          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md text-nowrap whitespace-nowrap">
             <p className="w-full flex items-center justify-center gap-1">
               With love from{" "}
               <span className="text-red-400 font-bold">{sender}</span>
