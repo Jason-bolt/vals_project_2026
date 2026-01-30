@@ -1,15 +1,23 @@
 "use client";
 
 import { BiSave } from "react-icons/bi";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { GiSelfLove } from "react-icons/gi";
 
 const Design6 = ({
   message,
+  sender,
   downloadCard,
   setMessage,
+  moveToNextDesign,
+  moveToPreviousDesign,
 }: {
   message: string;
+  sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (s: string) => void;
+  moveToNextDesign: () => void;
+  moveToPreviousDesign: () => void;
 }) => {
   if (!message) return null;
 
@@ -20,6 +28,17 @@ const Design6 = ({
         className="relative w-full max-w-2xl mx-4 h-[80vh] max-h-[600px] bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 rounded-lg shadow-2xl overflow-hidden border-4 border-rose-300"
         style={{ fontFamily: "serif" }}
       >
+        {/* Sender */}
+        {sender && (
+          <div className="absolute text-xs z-10 bottom-10 right-5 bg-white rounded-xl px-3 py-1 shadow-md text-nowrap whitespace-nowrap">
+            <p className="w-full flex items-center justify-center gap-1">
+              With love from{" "}
+              <span className="text-red-400 font-bold">{sender}</span>
+              <GiSelfLove className="text-red-500" />
+            </p>
+          </div>
+        )}
+
         {/* Vintage paper texture effect */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,_rgba(0,0,0,0.15)_1px,_transparent_0)] bg-[length:20px_20px]"></div>
 
@@ -84,10 +103,23 @@ const Design6 = ({
 
       <div className="flex items-center justify-center gap-4 w-full mt-2">
         <div
+          id={`Design_6:Message${message}`}
           className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 hover:cursor-pointer"
           onClick={() => downloadCard("vals_card6")}
         >
           <BiSave /> Download
+        </div>
+        <div
+          className="bg-yellow-400 py-3 px-4 rounded-lg text-red-950"
+          onClick={() => moveToPreviousDesign()}
+        >
+          <FaArrowLeftLong />
+        </div>
+        <div
+          className="bg-blue-400 py-3 px-4 rounded-lg text-red-950"
+          onClick={() => moveToNextDesign()}
+        >
+          <FaArrowRightLong />
         </div>
         {/* <div className="z-50 flex gap-1 items-center justify-center text-red-500 bg-white px-6 py-2 rounded-lg">
           <BiCopy /> Copy share link

@@ -66,12 +66,16 @@ const GetDesignComponent = ({
   sender,
   downloadCard,
   setMessage,
+  moveToNextDesign,
+  moveToPreviousDesign,
 }: {
   message: string;
   randomIndex: number;
   sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (message: string) => void;
+  moveToNextDesign: () => void;
+  moveToPreviousDesign: () => void;
 }): React.JSX.Element => {
   const DesignComponent = designs[randomIndex];
   return (
@@ -80,6 +84,8 @@ const GetDesignComponent = ({
       sender={sender}
       downloadCard={downloadCard}
       setMessage={setMessage}
+      moveToNextDesign={moveToNextDesign}
+      moveToPreviousDesign={moveToPreviousDesign}
     />
   );
 };
@@ -88,6 +94,22 @@ export default function Home() {
   const [message, setMessage] = useState<string>("");
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [sender, setSender] = useState<string | undefined>("");
+
+  const moveToNextDesign = () => {
+    if (randomIndex === designs?.length - 1) {
+      setRandomIndex(0);
+    } else {
+      setRandomIndex((prev) => prev + 1);
+    }
+  };
+
+  const moveToPreviousDesign = () => {
+    if (randomIndex === 0) {
+      setRandomIndex(designs?.length - 1);
+    } else {
+      setRandomIndex((prev) => prev - 1);
+    }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -162,6 +184,8 @@ export default function Home() {
               randomIndex={randomIndex}
               downloadCard={downloadCard}
               setMessage={setMessage}
+              moveToNextDesign={moveToNextDesign}
+              moveToPreviousDesign={moveToPreviousDesign}
             />
           </div>
         )}
