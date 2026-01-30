@@ -1,6 +1,7 @@
 "use client";
 
 import { BiSave } from "react-icons/bi";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { GiSelfLove } from "react-icons/gi";
 
 const Design9 = ({
@@ -8,11 +9,15 @@ const Design9 = ({
   sender,
   downloadCard,
   setMessage,
+  moveToNextDesign,
+  moveToPreviousDesign,
 }: {
   message: string;
   sender?: string;
   downloadCard: (id: string) => void;
   setMessage: (s: string) => void;
+  moveToNextDesign: () => void;
+  moveToPreviousDesign: () => void;
 }) => {
   if (!message) return null;
 
@@ -98,10 +103,23 @@ const Design9 = ({
 
       <div className="flex items-center justify-center gap-4 w-full mt-2">
         <div
+          id={`Design_9:Message${message}`}
           className="z-50 flex gap-1 items-center justify-center text-white bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 hover:cursor-pointer"
           onClick={() => downloadCard("vals_card9")}
         >
           <BiSave /> Download
+        </div>
+        <div
+          className="bg-yellow-400 py-3 px-4 rounded-lg text-red-950"
+          onClick={() => moveToPreviousDesign()}
+        >
+          <FaArrowLeftLong />
+        </div>
+        <div
+          className="bg-blue-400 py-3 px-4 rounded-lg text-red-950"
+          onClick={() => moveToNextDesign()}
+        >
+          <FaArrowRightLong />
         </div>
         {/* <div className="z-50 flex gap-1 items-center justify-center text-red-500 bg-white px-6 py-2 rounded-lg">
           <BiCopy /> Copy share link
