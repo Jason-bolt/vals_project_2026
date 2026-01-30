@@ -31,6 +31,7 @@ import Design22 from "./cardDesigns/design22";
 import Design23 from "./cardDesigns/design23";
 import Design24 from "./cardDesigns/design24";
 import Design25 from "./cardDesigns/design25";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 const designs = [
   Design1,
@@ -121,6 +122,17 @@ export default function Home() {
   };
 
   const downloadCard = (id: string) => {
+    console.log(id);
+    console.log(message);
+    const triggerValue = {
+      design: id,
+      message,
+    };
+
+    sendGTMEvent({
+      event: "download_card",
+      value: JSON.stringify(triggerValue),
+    });
     const canvas = document.getElementById(id) as HTMLElement;
     if (!canvas) return;
 
@@ -169,7 +181,7 @@ export default function Home() {
   return (
     <section>
       <div className="w-full h-44 xs:h-40 sm:h-36 md:h-32 lg:h-28 bg-red-500 flex justify-center items-center">
-        <h1 className="text-2xl font-bold font-tangerine px-24 text-center">
+        <h1 className="text-4xl font-bold font-tangerine px-24 text-center">
           Write a Valentine Message, Get a Beautiful Share Card
         </h1>
       </div>
