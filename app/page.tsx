@@ -182,7 +182,7 @@ export default function Home() {
     <section>
       <div className="w-full h-44 xs:h-40 sm:h-36 md:h-32 lg:h-28 bg-red-500 flex justify-center items-center">
         <h1 className="text-4xl font-bold font-tangerine px-24 text-center">
-          Write a Valentine Message, Get a Beautiful Share Card
+          Get a Beautiful Share Card
         </h1>
       </div>
 
